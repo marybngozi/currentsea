@@ -3,5 +3,6 @@ fetch("https://free.currencyconverterapi.com/api/v5/currencies")
   return response.json();
 })
 .then(data => {
-  console.log(data.results);
+  let result = data.results;
+  console.log(result.key());
 })
