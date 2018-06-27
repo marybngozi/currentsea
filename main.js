@@ -4,5 +4,5 @@ fetch("https://free.currencyconverterapi.com/api/v5/currencies")
 })
 .then(data => {
   let result = data.results;
-  console.log(result.key());
+  console.log(result.keys());
 })
