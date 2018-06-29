@@ -5,50 +5,43 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CurrentSea | Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <link rel="icon" type="image/png" href="favicon.png">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="main.js"></script>
   
 </head>
 <body>
   <center>
-  <div class="containd col-sm-5">
+  <div class="containd">
     <header >
       <h1>CurrentSea</h1>
     </header>
     <p class="top-note">Get your Up to Date currency rates.</p>
-    <form action="" method="post">
-      <div id="cOne">
-        <select class="cchoose" id="currencyOne">
-          <option value="-1">Choose Currency</option>
-        </select>
-        <input type="number" min="0" name="amtOne" class="amt" id="antOne" placeholder="Amount">
-      </div>
+    <div id="cOne">
+      <select id="curOne">
+        <option value="-1">Choose Currency</option>
+      </select>
+      <input type="number" min="0" name="amtOne" class="amt" id="amtOne" placeholder="Amount">
+    </div>
+      
+    <p class="equ-sign"><b>&equals;</b></p>
+
+    <div id="cTwo">
+      <select id="curTwo">
+        <option value="-1">Choose Currency</option>
+      </select>
+      <input type="number" min="0" name="amtTwo" class="amt" id="amtTwo" readonly placeholder="Amount">
+    </div>
       
 
-      <p class="equ-sign"><b>&equals;</b></p>
-
-      <div id="cTwo">
-        <select class="cchoose" id="currencyTwo">
-          <option value="-1">Choose Currency</option>
-        </select>
-        <input type="number" min="0" name="amtTwo" class="amt" id="antTwo" placeholder="Amount">
-      </div>
-      
-
-      <br>
-      <input type="submit" class="btn btn-primary btn-lg" value="Convert" id="convert">
-    </form>
-    <p class="outPut">Hello</p>
+    <br>
+    <button class="btn" id="convert"> Convert </button> 
+    <p class="outPut"></p>
     <hr>
     <footer>
-      <p><b><a href="twitter.com/marybngozi">@marybngozi</a></b></p>
-        
+      <p><b><a href="twitter.com/marybngozi">@marybngozi</a></b></p>  
     </footer>
   </div>
   </center>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
