@@ -1,4 +1,4 @@
-// //Registering the Service Worker
+//Registering the Service Worker
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
@@ -15,7 +15,7 @@ if ('serviceWorker' in navigator) {
 
 const currencyUrl = "https://free.currencyconverterapi.com/api/v5/currencies";
 let arradd = [];
-
+let num = 0;
 fetch(currencyUrl)
 .then(res => res.json())
 .then(data => {
@@ -25,17 +25,20 @@ fetch(currencyUrl)
 })
 .then(datakey => {
   for ( const key2 in datakey) {
-    const id = datakey[key2].id;
+    const id = datakey[key2].currencyName;
     arradd.push(id);
+    num++;
   }
   arradd.sort();
   arradd.map(idd => {
     $('#curOne, #curTwo').append($('<option>').text(`${idd}`).attr('value', idd));
   });
+  console.log(num);
 })
 .catch(error => {
   console.log(error);
 })
+
 $("#convert").on("click", () => {
   const amt = $('#amtOne').val();
   const curOne = $('#curOne option:selected').val();

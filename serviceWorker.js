@@ -1,4 +1,4 @@
-const cacheName = 'currency-cache-v1';
+const cacheName = 'currency-cache-v2';
 
 const CachedFiles = [
     '/',  //FOR THE index.html              
@@ -23,7 +23,7 @@ self.addEventListener('activate', event => {
     .then(keyList => Promise.all(keyList.map(thisCacheName => {
       if (thisCacheName !== cacheName){
         console.log("Service worker removing cached files from", thisCacheName);
-        return caches.delete(thisCacheName);        
+        //return caches.delete(thisCacheName);        
       }
     })))
     );
