@@ -4,7 +4,7 @@ const cacheName = 'currency-cache-v1'
 // an array of files to be cached(the app shell)
 const CachedFiles = [            
   'main.js',
-  'https://github.com/marybngozi/currentsea/blob/master/favicon.png',
+  'favicon.png',
   'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
   'https://fonts.googleapis.com/css?family=Galada',
   'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
