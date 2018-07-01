@@ -13,10 +13,10 @@ const CachedFiles = [
 ]
 
 // install event that installs all the files needed by the app shell
-self.addEventListener('install', function (e) {
+self.addEventListener('install',e => {
   console.log('[serviceWorker] install')
   e.waitUntil(
-    caches.open(cacheName).then(function (cache) {
+    caches.open(cacheName).then(cache => {
       console.log('[serviceWorker] caching app shell')
       return cache.addAll(CachedFiles)
     })
@@ -24,15 +24,15 @@ self.addEventListener('install', function (e) {
 })
 
 // activate event that purges any outdated file making sure updated files are served
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate',event => {
   event.waitUntil(
-    caches.keys().then(function (cacheNames) {
+    caches.keys().then(cacheNames => {
       return Promise.all(
-        cacheNames.filter(function (cacheName) {
+        cacheNames.filter(cacheName => {
           // Return true if you want to remove this cache,
           // but remember that caches are shared across
           // the whole origin
-        }).map(function (cacheName) {
+        }).map(cacheName => {
           return caches.delete(cacheName)
         })
       )
@@ -41,23 +41,23 @@ self.addEventListener('activate', function (event) {
 })
 
 // fetch event handler that tries to get requested file from the cache first then the network if it doesn't find it in the cache
-self.addEventListener('fetch', function (e) {
+self.addEventListener('fetch',e => {
   console.log('[serviceWorker] fetch', e.request.url)
   e.respondWith(
-    caches.match(e.request).then(function (response) {
+    caches.match(e.request).then(response => {
       return response || fetch(e.request)
     })
   )
 })
 
 // generic fallback
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch',event => {
   event.respondWith(
     // Try the cache
-    caches.match(event.request).then(function (response) {
+    caches.match(event.request).then(response => {
       // Fall back to network
       return response || fetch(event.request)
-    }).catch(function () {
+    }).catch(() => {
       // If both fail, show a generic fallback:
       console.log('offline oo');
     })

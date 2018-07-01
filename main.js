@@ -1,24 +1,10 @@
 //Registering the Service Worker
-
-/* if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
   navigator.serviceWorker
   .register('sw.js')
-  .then(registration => {
-    console.log('Service worker registration succeeded:', registration);
-  }).catch(error => {
-    console.log('Service worker registration failed:', error);
-  });
-} else {
-  console.log('Service workers are not supported.');
+  .then(() => console.log("Service Worker Registered"));
 }
 
-<script> */
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-    .register('sw.js')
-    .then(function () { console.log("Service Worker Registered"); });
-  }
-/* </script> */
 const currencyUrl = "https://free.currencyconverterapi.com/api/v5/currencies";
 let arradd = [];
 let num = 0;
