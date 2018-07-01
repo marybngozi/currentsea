@@ -44,15 +44,60 @@ $("#convert").on("click", () => {
     fetch(url)
     .then(response => response.json())
     .then(parsedData => {
-      console.log(parsedData);
       for(let rate in parsedData){
         let conversionVal = (parsedData[rate].val); 
         let totalAmt = (Number(amt) * conversionVal);
         $('#amtTwo').val(Math.round(totalAmt * 100) / 100);
         $('.outPut').empty();
         $('.outPut').append(`${amt} ${curOne} equals ${$('#amtTwo').val()} ${curTwo}`);
+        indexPart(query,conversionVal);
       }
+      
     }) 
   }
-     
-});
+});   
+
+
+/********************* control section *****************************/
+function indexPart(queryd,valuesd) {
+  // This works on all devices/browsers, and uses IndexedDBShim as a final fallback 
+  let indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+
+  // Open (or create) the database
+  let open = indexedDB.open("currentsea", 2);
+
+  // Create the schema
+  open.onupgradeneeded = () => {
+    let db = open.result;
+    let store = db.createObjectStore("Currents", { keyPath: "id" });
+    let index = store.createIndex("NameIndex", queryd);
+  };
+
+  open.onsuccess = () => {
+    // Start a new transaction
+    let db = open.result;
+    let tx = db.transaction("Currents", "readwrite");
+    let store = tx.objectStore("Currents");
+    let index = store.index("NameIndex");
+
+    // Add some data
+    store.put({ id: queryd, valuedd: valuesd});
+
+    /*   // Query the data
+      var getJohn = store.get(12345);
+      var getBob = index.get(["Smith", "Bob"]);
+    
+      getJohn.onsuccess = function () {
+        console.log(getJohn.result.name.first);  // => "John"
+      };
+    
+      getBob.onsuccess = function () {
+        console.log(getBob.result.name.first);   // => "Bob"
+      }; */
+
+    // Close the db when the transaction is done
+    tx.oncomplete = () => {
+      db.close();
+    };
+  }
+}
