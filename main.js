@@ -7,7 +7,7 @@ if ('serviceWorker' in navigator) {
 
 const currencyUrl = "https://free.currencyconverterapi.com/api/v5/currencies";
 let arradd = [];
-let num = 0;
+
 fetch(currencyUrl)
 .then(res => res.json())
 .then(data => {
@@ -17,9 +17,9 @@ fetch(currencyUrl)
 })
 .then(datakey => {
   for ( const key2 in datakey) {
-    const id = datakey[key2].currencyName;
+    const curName = datakey[key2].currencyName;
+    const id = `${curName}-(${datakey[key2].id})`;
     arradd.push(id);
-    num++;
   }
   arradd.sort();
   arradd.map(idd => {
@@ -33,8 +33,10 @@ fetch(currencyUrl)
 
 $("#convert").on("click", () => {
   const amt = $('#amtOne').val();
-  const curOne = $('#curOne option:selected').val();
-  const curTwo = $('#curTwo option:selected').val();  
+  let curOne = $('#curOne option:selected').val();
+  let curTwo = $('#curTwo option:selected').val(); 
+  curOne = curOne.slice(-4, -1);
+  curTwo = curTwo.slice(-4, -1); 
   const query = `${curOne}_${curTwo}`;
   if (curOne <= 0 && curTwo <= 0) {
     
@@ -43,6 +45,7 @@ $("#convert").on("click", () => {
     fetch(url)
     .then(response => response.json())
     .then(parsedData => {
+      console.log(parsedData);
       for(let rate in parsedData){
         let conversionVal = (parsedData[rate].val); 
         let totalAmt = (Number(amt) * conversionVal);
