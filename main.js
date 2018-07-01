@@ -25,7 +25,6 @@ fetch(currencyUrl)
   arradd.map(idd => {
     $('#curOne, #curTwo').append($('<option>').text(`${idd}`).attr('value', idd));
   });
-  console.log(num);
 })
 .catch(error => {
   console.log(error);
